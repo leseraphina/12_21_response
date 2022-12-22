@@ -81,6 +81,7 @@ header>p.btn{
   flex-direction: column;
   justify-content: space-between;
   display:none;
+  background-color:red;
 }
 header>p.btn>span{
   display:block;

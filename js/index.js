@@ -1,3 +1,116 @@
+import $ from 'jquery';
+
+$(function(){
+let windowW = $(window).width();
+console.log(windowW)
+if(windowW >= 1160){ 
+  nav();
+  submenu();
+}
+ else if (windowW < 1159 && windowW >= 980){
+  nav();
+  submenu();
+  }
+ else if (windowW < 979 && windowW >= 580){ 
+  tNav();
+  gallery();
+ }
+ else if(windowW < 579){
+  tNav();
+  gallery();
+  formData();
+ }
+// 공통
+// reset : 포트폴리오
+$(window).on('resize',function(e){
+  window.location.reload();
+})
+
+
+// 
+})
+// web nav
+function nav(){
+  $('nav li>a').on('click',function(e){
+    const navA = $(this).attr('href');
+    const aPos = $(navA).offset().top;
+    const headerHeight = $('header').innerHeight();
+    $('html,body').animate({scrollTop:aPos- headerHeight},800);
+    return false;
+  })
+}
+// table, mobil nav
+function tNav(){
+let navW = $('nav').width();
+$('header .btn').on('click',function(e){
+  $('nav').animate({left:0},400);
+  $(this).hide();
+})
+  // scroll
+$('nav li>a').on('click',function(e){
+  const navA = $(this).attr('href');
+    const aPos = $(navA).offset().top;
+    const headerHeight = $('header').innerHeight();
+    $('html,body').animate({scrollTop:aPos- headerHeight},800);
+    $('nav').css('left','-'+navW+'px')
+    $('header .btn').show();
+    return false;
+})
+  // close
+  $('nav .close').on('click',function(e){
+    $('nav').css('left','-'+navW+'px');
+    $('header .btn').show();
+  })
+}
+
+function submenu(){
+$('aside li>a').on('click',function(e){
+   const asideA = $(this).attr('href');
+   const asidePos = $(asideA).offset().top;
+   const headerTop = $('header').innerHeight();
+   $('html,body').animate({scrollTop:asidePos- headerTop});
+   return false;
+})
+}
+
+function gallery(){
+  // 준비하기
+ const figureW = $('#box03 #all figure').width();
+ $('#all figure:last').prependTo('#all');
+ $('#all').css('margin-left','-'+figureW+'px')
+  //  이벤트
+  $('#gallery .prev').on('click',function(e){
+    $('#all').animate({marginLeft:'-='+figureW+'px'},400,function(){
+      $('#all figure:first').appendTo('#all');
+      $('#all').css('margin-left','-'+figureW+'px')
+    })
+  });
+  $('#gallery .next').on('click',function(e){
+      $('#all').animate({marginLeft:'+='+figureW+'px'},400,function(){
+        $('#all figure:last').prependTo('#all');
+        $('#all').css('margin-left','-'+figureW+'px')
+      })
+  });
+}
+
+function formData(){
+const $liForm = $('#box04 li>input,#box04 li>textarea');
+// console.log($liForm)
+$liForm.removeAttr('placeholder');
+// focus
+$liForm.on('focus',function(e){
+  $(this).prev('label').fadeOut(300);
+});
+// blur
+$liForm.on('blur',function(e){
+  let str = $(this).val();
+  if(str === ''){
+    $(this).prev('label').fadeIn(300);
+  }
+});
+
+}
+
 // Dom object -> 데이터 정리
 const h4 = document.querySelector('#modal h4');
 const img = document.querySelector('#modal figure>img');

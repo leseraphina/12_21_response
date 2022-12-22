@@ -35,6 +35,7 @@ article h3{
   header>div>h1>a{
     font-size:35px;
   }
+  header>p.btn{display:flex;}
   nav{
     position:fixed;
     left:-400px; top:0;
@@ -76,9 +77,11 @@ article h3{
     /* bottom:14.5%; */
     left:0;
     margin-left:0;
+    margin: 0 auto;
+    justify-content: space-evenly;
   }
   #box01>ul>li{
-    width:33.33333vw;
+    width:30vw;
   }
   #box01>ul>li>span{
     width:26.64vw;
@@ -396,7 +399,7 @@ p.next{
 
 @media screen and (max-width:980px){
  #modal{
-  display:block;
+  /* display:block; */
   padding:6.66vh 5vw 3.333vh;
   box-sizing:border-box;}
  #modal>.close{
